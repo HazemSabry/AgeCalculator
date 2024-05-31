@@ -1,0 +1,486 @@
+:root {
+    --background-color: #FEF7FF;
+    --screen-scale: 1;
+    --button-color: #6750A4;
+    --font-size: 1rem;
+    --error-color: #BA1A1A;
+    --input-field-background-color: #E7E0E8;
+    --input-field-icon-dimension: 24px;
+    --card-page-logo-dimensions: calc(8rem * var(--screen-scale));
+
+    --go-back-heder-btn-transform-rotate:rotate(180deg);
+    --page-flex-direction: row;
+    --input-text-align:left;
+}
+
+html {
+    font-size: calc(16px * var(--screen-scale));
+    scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+    /* This CSS block sets the box-sizing property to border-box for all elements in the document.
+    This ensures that the padding and border are included in the element's total width and height.
+    It also sets the margin property to 0, which means that there will be no space between elements by default.
+    The font-family property is set to "Alexandria", which is a specific font that can be used throughout the document. */
+    box-sizing: border-box;
+    margin: 0;
+    font-family: "Alexandria", sans-serif;
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com 
+ * This CSS block is responsible for setting the minimum height, width, and overflow-x property of the body element.
+ * It ensures that the body element has a minimum height and width of 100vh and 100vw respectively, and that it overflows in the x-axis.
+ * This is done to create a full-screen layout with a scrollable content.
+ */
+body {
+    min-height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+/************************************************************************************************************************** Page Header ************************************************************************************************************************************/
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com 
+ * This CSS rule sets the position of the navigation bar to fixed at the top of the page.
+ * It also ensures that the navigation bar stays at the top even when scrolling.
+ * The z-index property is used to stack the navigation bar on top of other elements on the page.
+ * The width of the navigation bar is set to 100% to cover the entire width of the viewport.
+ */
+body>nav{
+    position: fixed;
+    z-index: 99999999;
+    top: 0;
+    right: 0;
+    width: 100%;
+}
+
+body>nav>.page-header {
+    width: 100%;
+    display: none;
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com 
+ * This CSS rule sets the styling for the page title in the navigation bar.
+ * It uses flexbox properties to align the title in a row-reverse direction,
+ * with a gap of 1rem between the logo and the title text.
+ * The padding is set to 1.5rem on the top and bottom, and 1rem on the left and right.
+ * The font size is set to 1.2 times the base font size, and the font weight is set to 600 (bold).
+ * The width is set to 100% to ensure it takes up the full width of its parent container.
+ * The background color is set to the value of the --background-color variable.
+*/
+body>nav>.page-header>.page-title {
+    display: flex;
+    flex-direction: var(--page-flex-direction);
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+    font-size: calc(var(--font-size) * 1.2);
+    font-weight: 600;
+    width: 100%;
+    background-color: var(--background-color);
+}
+
+body>nav>.page-header>.page-title>svg{
+    cursor: pointer;
+    transform: var(--go-back-heder-btn-transform-rotate);
+}
+
+/************************************************************************************************************************** logo-section ************************************************************************************************************************************/
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com 
+ * This CSS rule is used to style the logo section of the create account or login card.
+ * It applies padding to the section based on the screen scale.
+*/
+body>.cards-container>.card-container>.card>.logo-section {
+    padding: calc(3rem * var(--screen-scale)) calc(3rem * var(--screen-scale)) calc(2rem * var(--screen-scale)) calc(3rem * var(--screen-scale));
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com 
+ * This CSS rule is used to style the logo section of the create account page.
+ * It sets the background color, border radius, width, height, and position of the logo.
+*/
+body>.cards-container>.card-container>.card>.logo-section>.logo {
+    background-color: var(--logo-background-color);
+    border-radius: 50%;
+    width: var(--card-page-logo-dimensions);
+    height: var(--card-page-logo-dimensions);
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com
+ * This CSS rule is used to style the logo image within the card section of the create account or login card.
+ * It sets the width and height of the logo image to the value defined by the '--card-page-logo-dimensions' CSS variable.
+ * The border-radius property is used to create a circular shape for the logo image.
+ */
+body>.cards-container>.card-container>.card>.logo-section>.logo>img{
+    width: var(--card-page-logo-dimensions);
+    height: var(--card-page-logo-dimensions);
+    border-radius: 50%;
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com 
+ * This section contains the styling for the logo title within the create account or login card.
+ *
+ * @section logo-section
+ * @memberof card
+ */
+body>.cards-container>.card-container>.card>.logo-section>.logo-title {
+    width: fit-content;
+    position: relative;
+    left: calc(50% - var(--font-size) * 6);
+    font-size: calc(var(--font-size) * 2);
+    padding: calc(var(--font-size));
+}
+
+/************************************************************************************************************************** cards ************************************************************************************************************************************/
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com 
+ * This CSS block is responsible for the styling of the cards-container.
+ * It includes the necessary properties to create a scrollable, snappable container for the login/signup forms.
+*/
+body>.cards-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction:var(--page-flex-direction);
+    overflow-x: auto;
+    /*
+    The scroll-snap-type property is used to create a snappable scrolling experience.
+    'x mandatory' means that the scrolling will be snapped along the x-axis and it is mandatory.
+    */
+    scroll-snap-type: x mandatory;
+}
+
+body>.cards-container::-webkit-scrollbar {
+    /*
+     * The width and height of the scrollbar are set to 0 to hide it.
+     */
+    width: 0;
+    height: 0;
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com 
+ * This CSS block is responsible for styling the container that holds the login/signup card.
+ * It sets the minimum, maximum, and default width and height of the container,
+ * and aligns it in the center of the viewport.
+ * The scroll-snap-align property is used to make the container snap to the center when scrolling.
+*/
+body>.cards-container>.card-container {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: center;
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com 
+ * This is the styling for the card.
+ * It includes the background color, border radius, max width, and box shadow.
+ */
+body>.cards-container>.card-container>.card {
+    background-color: var(--background-color);
+    border-radius: 30px;
+    max-width: 25rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+/********************************************************************************* form-section *************************************************************************************/
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com 
+ * This section contains the styling for the form within the create account or login card.
+ * It includes the styling for the form title, information fields, input fields, buttons, etc.
+ *
+ * @section form-section
+ * @memberof card
+ */
+body>.cards-container>.card-container>.card>.form-section {
+    padding: 0 1rem;
+    font-size: calc(var(--font-size) * 1);
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com 
+ * This CSS block is responsible for styling the form title in the create account or login card.
+ * It includes the display, flex direction, gap, and alignment properties.
+ */
+body>.cards-container>.card-container>.card>.form-section>.form-title {
+    display: flex;
+    flex-direction: var(--page-flex-direction);
+    gap: 1rem;
+    align-items: center;
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com 
+ * This CSS rule sets the dimensions and style of the icon within the form title.
+ */
+body>.cards-container>.card-container>.card>.form-section>.form-title>.icon {
+    width: calc(var(--input-field-icon-dimension) * 1.7);
+    height: calc(var(--input-field-icon-dimension) * 1.7);
+    color: #fff;
+    padding: 0.7rem;
+    background-color: var(--button-color);
+    border-radius: 50%;
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com 
+ * This CSS rule is used to style the information fields within the create account or login card.
+ * It includes the styling for the form title, information fields, input fields, buttons, etc.
+ *
+ * @section form-section
+ * @memberof card
+ */
+body>.cards-container>.card-container>.card>.form-section>.information {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem 0;
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com 
+ * This section contains the styling for the country and city input container in the create account or login form.
+ * It is a flex container with a row-reverse direction and a gap of 1rem.
+*/
+body>.cards-container>.card-container>.card>.form-section>.information>.birthday-input-container {
+    display: flex;
+    gap: 1rem;
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com 
+ * This CSS rule sets the minimum width and width of the input container,
+ * and aligns the elements inside it. It also positions the input container
+ * relative to its parent.
+*/
+body>.cards-container>.card-container>.card>.form-section>.information>.input-container,
+body>.cards-container>.card-container>.card>.form-section>.information>.birthday-input-container>.input-container {
+    min-width: calc(50%-0.5rem);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com
+ * This section contains the styling for the input container within the create account or login form section.
+ * It includes the positioning of the icon and the input field.
+ * The icon is positioned at the right side of the input field with a specified width and height.
+ * The input field has a specified font size, background color, border, box shadow, min-width, width, and padding.
+*/
+body>.cards-container>.card-container>.card>.form-section>.information>.input-container>.icon,
+body>.cards-container>.card-container>.card>.form-section>.information>.birthday-input-container>.input-container>.icon {
+    position: absolute;
+    left: calc(0.5rem);
+    width: var(--input-field-icon-dimension);
+    height: var(--input-field-icon-dimension);
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com
+ * This section contains the styling for the input container within the create account or login form section.
+ * It includes the positioning of the icon and the input field.
+ * The icon is positioned at the right side of the input field with a specified width and height.
+ * The input field has a specified font size, background color, border, box shadow, min-width, width, and padding.
+ *
+ * @section form-section
+ * @memberof card
+ */
+body>.cards-container>.card-container>.card>.form-section>.information>.input-container>input,
+body>.cards-container>.card-container>.card>.form-section>.information>.input-container>select,
+body>.cards-container>.card-container>.card>.form-section>.information>.birthday-input-container>.input-container>input,
+body>.cards-container>.card-container>.card>.form-section>.information>.birthday-input-container>.input-container>select {
+    font-size: inherit;
+    background-color: var(--input-field-background-color);
+    border: none;
+    box-shadow: 0 1px 0 0 #000;
+    min-width: calc(50% - 0.5rem);
+    text-align: var(--input-text-align);
+    width: 100%;
+    padding: calc(1rem * var(--screen-scale)) 1rem calc(1rem * var(--screen-scale)) 2.5rem;
+}
+
+#birth-year,#birth-month{
+    padding-left: 2.5rem;
+    width: fit-content;
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com
+ * This CSS block is responsible for styling the input fields within the create account or login form section.
+ * It includes the focus styles for the input fields, which change the appearance when the user interacts with them.
+ * The focus styles apply to both input fields and select elements within the form.
+ * The focus styles use the 'outline' property to remove the default browser outline and apply a custom box-shadow instead.
+ * The box-shadow is set to a light gray color (var(--button-color)) to provide visual feedback when the user interacts with the input fields.
+ */
+body>.cards-container>.card-container>.card>.form-section>.information>.input-container>input:focus,
+body>.cards-container>.card-container>.card>.form-section>.information>.input-container>select:focus,
+body>.cards-container>.card-container>.card>.form-section>.information>.birthday-input-container>.input-container>input:focus,
+body>.cards-container>.card-container>.card>.form-section>.information>.birthday-input-container>.input-container>select:focus {
+    outline: none;
+    box-shadow: 0 2px 0 0  var(--button-color);
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com
+ * This CSS rule sets the appearance of select elements within the form.
+ * It changes the text color, cursor, and removes the default browser appearance.
+ * The -moz-appearance and -webkit-appearance properties are used for Firefox and Chrome respectively.
+ */
+body>.cards-container>.card-container>.card>.form-section>.information>.input-container>select,
+body>.cards-container>.card-container>.card>.form-section>.information>.birthday-input-container>.input-container>select {
+    color: #606060;
+    cursor: pointer;
+    /* for Firefox */
+    -moz-appearance: none;
+    /* for Chrome */
+    -webkit-appearance: none;
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com
+ * This CSS rule is used to hide the default browser appearance of the select elements.
+ * The display: none; property is used to hide the select elements.
+ */
+body>.cards-container>.card-container>.card>.form-section>.information>.input-container>select::-ms-expand,
+body>.cards-container>.card-container>.card>.form-section>.information>.birthday-input-container>.input-container>select::-ms-expand {
+    display: none;
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com
+ * This CSS rule is used to remove the default spin button appearance in number input fields.
+ * It is specifically targeting Webkit browsers.
+ * The '-webkit-outer-spin-button' and '-webkit-inner-spin-button' selectors are used to target the spin buttons.
+ * The '-webkit-appearance: none;' property is used to remove the default browser appearance.
+ */
+body>.cards-container>.card-container>.card>.form-section>.information>.input-container>input::-webkit-outer-spin-button,
+body>.cards-container>.card-container>.card>.form-section>.information>.input-container>input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com
+ * This CSS block is responsible for styling the input fields within the form section of the create account or login card.
+ * It includes the positioning of the icon and the input field. The icon is positioned at the right side of the input field with a specified width and height.
+ * The input field has a specified font size, background color, border, box shadow, min-width, width, and padding.
+ */
+body>.cards-container>.card-container>.card>.form-section>.information>.input-container>input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com
+ * This CSS block is responsible for styling the form buttons within the create account or login form section.
+ * It sets the width to 100% of the parent container.
+ *
+ * @section form-section
+ * @memberof card
+ */
+body>.cards-container>.card-container>.card>.form-section>.information>.form-buttons-container {
+    width: 100%;
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com
+ * This CSS block is responsible for styling the stacked form buttons within the create account or login form section.
+ * It sets the flex-direction to column and adds some gap between the buttons.
+ *
+ * @section form-section
+ * @memberof card
+ */
+body>.cards-container>.card-container>.card>.form-section>.information>.form-stack-buttons-container {
+    flex-direction: column;
+    gap: 0;
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com
+ * This CSS block is responsible for styling the 'Next' and 'Back' buttons in the form section of the create account or login card.
+ * The buttons have a font size calculated based on the global font size variable, a border of none, a minimum width of 50% of the parent container minus 0.5rem, a width of 100%, padding of 0.5rem, a border radius of 50px, and a cursor of pointer.
+ * The font size, padding, and border radius are calculated based on the global font size variable.
+ */
+body>.cards-container>.card-container>.card>.form-section>.information>.form-buttons-container>.Submit-btn {
+    font-size: calc(var(--font-size) * 0.9);
+    border: none;
+    min-width: calc(50% - 0.5rem);
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com
+ * This CSS rule is used to style the 'Next' button in the form section of the create account or login card.
+ * It changes the background color on hover, and reduces the brightness by 20% when hovered.
+ */
+body>.cards-container>.card-container>.card>.form-section>.information>.form-buttons-container>.Submit-btn:hover{
+    filter: brightness(1.1);
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com
+ * This CSS rule is used to style the 'Next' button in the form section of the create account or login card.
+ * It changes the background color on active, and reduces the brightness by 10% when active.
+ * The button has a border radius of 15px, and a box shadow for a subtle 3D effect.
+ */
+body>.cards-container>.card-container>.card>.form-section>.information>.form-buttons-container>.Submit-btn:active{
+    filter: brightness(0.9);
+}
+
+/**
+ * @author Hazem Sabry 
+ * @gmail hazemsabry2002@gmail.com
+ * This CSS rule is used to style the 'Next' button in the form section of the create account or login card.
+ * It changes the background color of the button to the color defined by the '--button-color' CSS variable.
+ * The text color of the button is set to white.
+ */
+body>.cards-container>.card-container>.card>.form-section>.information>.form-buttons-container>.Submit-btn {
+    background-color: var(--button-color);
+    color: #fff;
+}
