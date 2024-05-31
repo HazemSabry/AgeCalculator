@@ -143,7 +143,8 @@ body>.cards-container>.card-container>.card>.logo-section>.logo>img{
 body>.cards-container>.card-container>.card>.logo-section>.logo-title {
     width: fit-content;
     position: relative;
-    left: calc(50% - var(--font-size) * 6);
+    left: 50%;
+    transform: translateX(-50%);
     font-size: calc(var(--font-size) * 2);
     padding: calc(var(--font-size));
 }
@@ -275,6 +276,20 @@ body>.cards-container>.card-container>.card>.form-section>.information {
 body>.cards-container>.card-container>.card>.form-section>.information>.birthday-input-container {
     display: flex;
     gap: 1rem;
+    width: 100%;
+}
+
+/**
+ * @author Hazem Sabry 
+ * @email hazemsabry2002@gmail.com
+ * This CSS rule is used to style the title for the birth day input fields in the form section of the create account or login card.
+ * It adjusts the positioning and styling of the title to better align with the input fields.
+ */
+body>.cards-container>.card-container>.card>.form-section>.information>.birth-day-input-title{
+    margin-bottom: -1rem;
+    margin-top: -0.5rem;
+    color: var(--button-color);
+    font-weight: 700;
 }
 
 /**
@@ -334,9 +349,8 @@ body>.cards-container>.card-container>.card>.form-section>.information>.birthday
     padding: calc(1rem * var(--screen-scale)) 1rem calc(1rem * var(--screen-scale)) 2.5rem;
 }
 
-#birth-year,#birth-month{
-    padding-left: 2.5rem;
-    width: fit-content;
+#birth-month{
+    padding-left: 1rem;
 }
 
 /**

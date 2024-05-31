@@ -33,6 +33,13 @@ class Card {
     birthYearSelect;
     birthMonthSelect;
     birthDaySelect;
+    birthDateSelectCard2;
+    year;
+    month;
+    day;
+    yearOfBirth;
+    monthOfBirth;
+    dayOfBirth;
     age;
 
     constructor() {
@@ -59,6 +66,12 @@ class Card {
         this.birthYearSelect = document.getElementById("birth-year");
         this.birthMonthSelect = document.getElementById("birth-month");
         this.birthDaySelect = document.getElementById("birth-day");
+        this.birthDateSelectCard2 = document.getElementById("birth-date-card2");
+
+        const date = new Date();
+        this.year = date.getFullYear();
+        this.month = date.getMonth();
+        this.day = date.getDate();
     }
 
     /**
@@ -157,6 +170,8 @@ class Card {
         this.submitBtnCard2.addEventListener("click", (e) => {
             e.preventDefault();
             if (!this.checkInputsIsValid(2)) return;
+            this.calculateAgeMethod2();
+            this.sendTheInformation(2);
         });
     }
 
@@ -186,9 +201,9 @@ class Card {
                 formInputs[i].addEventListener("blur", () => {
                     formInputs[i].style.boxShadow = `0 1px 0 0  #000`;
                 });
-                return true;
             }
         }
+        return true;
     }
 
     /**
@@ -198,12 +213,7 @@ class Card {
      * @returns {void}
      */
     generateDateOptions() {
-        const date = new Date();
-        const year = date.getFullYear();
-        const month = date.getMonth();
-        const day = date.getDate();
-
-        for (let i = year - 110; i <= year; i++) {
+        for (let i = this.year - 110; i <= this.year; i++) {
             const option = document.createElement("option");
             option.value = i;
             option.innerText = i;
@@ -238,30 +248,45 @@ class Card {
     }
 
     calculateAgeMethod1() {
-        const date = new Date();
-        const year = date.getFullYear();
-        const month = date.getMonth();
-        const day = date.getDate();
-
         const yearOfBirth = this.birthYearSelect.value;
         const monthOfBirth = this.birthMonthSelect.value;
         const dayOfBirth = this.birthDaySelect.value;
 
         const monthOfBirthNumber = monthsInfo[monthOfBirth].monthNumber;
 
-        const yearsOld = month > monthOfBirthNumber ? (year - yearOfBirth) : (year - yearOfBirth - 1);
-        const monthOld = day > dayOfBirth ? (month - monthOfBirthNumber + 12) % 12 : (month - monthOfBirthNumber + 12 - 1) % 12;
+        this.yearOfBirth = yearOfBirth;
+        this.monthOfBirth = monthOfBirthNumber;
+        this.dayOfBirth = dayOfBirth;
+
+        this.calculateAge(yearOfBirth, monthOfBirthNumber, dayOfBirth);
+    }
+
+    calculateAgeMethod2() {
+        const birthDate = new Date(this.birthDateSelectCard2.value);
+        const yearOfBirth = birthDate.getFullYear();
+        const monthOfBirth = birthDate.getMonth();
+        const dayOfBirth = birthDate.getDate();
+
+        this.yearOfBirth = yearOfBirth;
+        this.monthOfBirth = monthOfBirth;
+        this.dayOfBirth = dayOfBirth;
+
+        this.calculateAge(yearOfBirth, monthOfBirth, dayOfBirth);
+    }
+
+    calculateAge(yearOfBirth, monthOfBirth, dayOfBirth) {
+        const yearsOld = this.month > monthOfBirth ? (this.year - yearOfBirth) : (this.year - yearOfBirth - 1);
+        const monthOld = this.day > dayOfBirth ? (this.month - monthOfBirth + 12) % 12 : (this.month - monthOfBirth + 12 - 1) % 12;
 
         let dayOld;
-        if (day >= dayOfBirth) {
-            dayOld = day - dayOfBirth;
+        if (this.day >= dayOfBirth) {
+            dayOld = this.day - dayOfBirth;
         } else {
-            const numberOfDaysForLastMonth = this.getMonthBeforeNow(month);
-            dayOld = (day - dayOfBirth + numberOfDaysForLastMonth) % numberOfDaysForLastMonth;
+            const numberOfDaysForLastMonth = this.getMonthBeforeNow(this.month);
+            dayOld = (this.day - dayOfBirth + numberOfDaysForLastMonth) % numberOfDaysForLastMonth;
         }
 
         this.age = `${yearsOld}-year, ${monthOld}-month, ${dayOld}-day`
-
     }
 
     sendTheInformation(cardNumber) {
@@ -269,14 +294,11 @@ class Card {
         const fullName = cardContainer.querySelector("[name=\"full-name\"]").value;
         const gmail = cardContainer.querySelector("[name=\"gmail\"]").value;
         const phoneNumber = cardContainer.querySelector("[name=\"phone-number\"]").value;
-        const birthYear = cardContainer.querySelector("[name=\"birth-year\"]").value;
-        const birthMonth = cardContainer.querySelector("[name=\"birth-month\"]").value;
-        const birthDay = cardContainer.querySelector("[name=\"birth-day\"]").value;
         const gender = cardContainer.querySelector("[name=\"gender\"]").value;
         const country = cardContainer.querySelector("[name=\"country\"]").value;
         const city = cardContainer.querySelector("[name=\"city\"]").value;
 
-        const birthData = `${birthMonth} ${birthDay}, ${birthYear}`;
+        const birthData = `${this.yearOfBirth}-${this.monthOfBirth + 1}-${this.dayOfBirth}`;
         const location = `${city}, Egypt`;
 
         const info = {
@@ -290,6 +312,10 @@ class Card {
 
         console.log(info);
     }
+
+    setCard2DateSelectionLimit() {
+        this.birthDateSelectCard2.max = new Date().toISOString().split("T")[0];
+    }
 }
 
 const informationCard = new Card();
@@ -299,4 +325,5 @@ informationCard.btnCardSubmitForm();
 informationCard.saveInputValueToSession();
 informationCard.getInputValueFromSession();
 informationCard.generateDateOptions();
+informationCard.setCard2DateSelectionLimit();
 mobileGoBackBtnAction();
