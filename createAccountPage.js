@@ -275,6 +275,7 @@ class Card {
     }
 
     calculateAge(yearOfBirth, monthOfBirth, dayOfBirth) {
+        // 2022-9 2204-5 = 1
         const yearsOld = this.month > monthOfBirth ? (this.year - yearOfBirth) : (this.year - yearOfBirth - 1);
         const monthOld = this.day > dayOfBirth ? (this.month - monthOfBirth + 12) % 12 : (this.month - monthOfBirth + 12 - 1) % 12;
 
